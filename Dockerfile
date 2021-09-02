@@ -1,19 +1,18 @@
 FROM golang AS buildStage
 
-WORKDIR /go/src/github.com/drone-navigation-system
+WORKDIR /thisdir
 COPY . .
-ENV GIT_TERMINAL_PROMPT=1
-RUN go get golang.org/x/sys/unix
-RUN CGO_ENABLED=0  go get -v .../.
-
-RUN  CGO_ENABLED=0 go build
+RUN CGO_ENABLED=0  go build -mod vendor -o /go/bin/ ./...
+RUN ls -ltr /go/bin
 
 FROM alpine
 
-# RUN apk --update --no-cache add openssh ca-certificates && update-ca-certificates 2>/dev/null || true
-
 WORKDIR /app
-COPY --from=buildStage /go/src/github.com/drone-navigation-system .
-
+COPY --from=buildStage /go/bin/* /app/theapp
+COPY swagger/swagger.yaml ./swagger/
 EXPOSE 8080
-ENTRYPOINT ["/app/drone-navigation-system"]
+ENV BASE_URL=/api/v1
+ENV SECTOR_ID=22
+RUN adduser -D myuser
+USER myuser
+ENTRYPOINT ["/app/theapp"]

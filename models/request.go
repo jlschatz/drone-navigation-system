@@ -1,8 +1,8 @@
 package models
 
 type Request struct {
-	X   float32 `json: "x"`
-	Y   float32 `json: "y"`
-	Z   float32 `json: "z"`
-	Vel float32 `json: "vel"`
+	X   float64 `json: "x"`
+	Y   float64 `json: "y"`
+	Z   float64 `json: "z"`
+	Vel float64 `json: "vel"`
 }

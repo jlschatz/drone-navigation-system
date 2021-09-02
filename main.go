@@ -1,44 +1,29 @@
 package main
 
 import (
-	"log"
-	"net/http"
-	"time"
+	"os"
 
-	"github.com/go-chi/chi"
-	"github.com/go-chi/chi/middleware"
-	"github.com/go-chi/cors"
-	httpSwagger "github.com/swaggo/http-swagger"
-	// _ "github.com/theatre-layout-go/docs"
+	"github.com/drone-navigation-system/controller"
+	router "github.com/drone-navigation-system/http"
+	"github.com/drone-navigation-system/service"
 )
 
 func main() {
 
-	r := chi.NewRouter()
+	httpRouter := router.NewChiRouter()
+	srv := service.NewDNSService()
+	c := controller.NewDNSController(srv)
 
-	r.Use(middleware.RequestID)
-	r.Use(middleware.RealIP)
-	r.Use(middleware.Logger)
-	r.Use(middleware.Recoverer)
+	baseURL := os.Getenv("BASE_URL")
 
-	r.Use(middleware.Timeout(60 * time.Second))
+	httpRouter.GET("/", c.Swagger)
 
-	c := cors.New(cors.Options{
-		AllowedOrigins:   []string{"*"},
-		AllowedMethods:   []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
-		AllowedHeaders:   []string{"Accept", "Authorization", "Content-Type"},
-		ExposedHeaders:   []string{"Link"},
-		AllowCredentials: true,
-	})
-	r.Use(c.Handler)
+	httpRouter.GET("/swagger", c.Swagger)
 
-	r.Get("/*", httpSwagger.Handler(
-		httpSwagger.URL("/swagger/doc.json"),
-	))
+	httpRouter.GET("/ping", c.Ping)
 
-	r.Get("/api/v1/layout", getLayout)
+	httpRouter.POST(baseURL+"/", c.GetLocation)
 
-	log.Println("Server listening on port: 8080")
-	http.ListenAndServe(":8080", r)
+	httpRouter.SERVE(":8080")
 
 }
