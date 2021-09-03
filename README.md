@@ -136,3 +136,12 @@
             type: float64
             example: 123.0
 
+
+## DevOps
+
+    The Docker container is build via a CircleCI pipline integrated with Github. The container is then pushed to a private Docker registry called Treescale.
+    Unit tests are also executed during this pipeline run and will fail the build if all tests do not pass.
+    The configuration for this pipeline can be viewed in the .circleci/config.yml file
+
+
+
