@@ -3,7 +3,6 @@ FROM golang AS buildStage
 WORKDIR /thisdir
 COPY . .
 RUN CGO_ENABLED=0  go build -mod vendor -o /go/bin/ ./...
-RUN ls -ltr /go/bin
 
 FROM alpine
 
