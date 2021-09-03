@@ -12,8 +12,8 @@ Foobar is a Python library for dealing with word pluralization.
 
     Please note: If Docker is not used and the binary is executed directly, the following two environment variables will be required:
 
-    export BASE_URL=/api/v1
-    export SECTOR_ID=<any random number>
+        export BASE_URL=/api/v1
+        export SECTOR_ID=<any random number>
 
 ## Run the tests
 
