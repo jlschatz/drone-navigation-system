@@ -22,7 +22,7 @@ func main() {
 
 	httpRouter.GET("/ping", c.Ping)
 
-	httpRouter.POST(baseURL+"/", c.GetLocation)
+	httpRouter.POST(baseURL+"/loc", c.GetLocation)
 
 	httpRouter.SERVE(":8080")
 
