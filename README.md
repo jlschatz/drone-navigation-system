@@ -1,6 +1,6 @@
 # drone-navigation-system
 
-Foobar is a Python library for dealing with word pluralization.
+    drone-navigation-system is a REST API for the location retrieval of a drone out in the field. 
 
 ## Installation
 
