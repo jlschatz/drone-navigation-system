@@ -17,7 +17,7 @@
 
 ## Run the tests
 
-    go test
+    go test ./... --cover
 
 # REST API
 

@@ -1,0 +1,8 @@
+github.com/drone-navigation-system/controller/dns-controller.go:23:	NewDNSController	100.0%
+github.com/drone-navigation-system/controller/dns-controller.go:29:	Swagger			0.0%
+github.com/drone-navigation-system/controller/dns-controller.go:34:	Ping			100.0%
+github.com/drone-navigation-system/controller/dns-controller.go:40:	GetLocation		76.9%
+github.com/drone-navigation-system/service/dns-service.go:19:		NewDNSService		100.0%
+github.com/drone-navigation-system/service/dns-service.go:24:		GetLocation		100.0%
+github.com/drone-navigation-system/service/dns-service.go:31:		convertStringToFloat64	75.0%
+total:									(statements)		80.8%

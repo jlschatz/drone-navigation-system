@@ -8,7 +8,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestDNSService_GetLocation(t *testing.T) {
+func TestDNSService_Success_GetLocation(t *testing.T) {
 
 	os.Setenv("SECTOR_ID", "5.0")
 
